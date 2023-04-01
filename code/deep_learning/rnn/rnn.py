@@ -84,7 +84,7 @@ with tf.Session() as sess:
     sess.run(init)
     n_batches = mnist.train.num_examples // args.batch_size
     for epoch in range(args.num_epoch):
-        for batch in range(n_batches):
+        for _ in range(n_batches):
             X_train, y_train = mnist.train.next_batch(args.batch_size)
             X_train = X_train.reshape([-1, step_size, input_size])
             sess.run(optimizer, feed_dict={X: X_train, y: y_train})

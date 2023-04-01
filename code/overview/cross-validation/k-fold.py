@@ -21,8 +21,8 @@ A bar displaying the current train-test split as well as the actual data points 
 In the bar, "-" is a training point and "T" is a test point.
 """)
 
-print("Data:\n{}\n".format(data))
-print('K-Fold split (with n_splits = {}):\n'.format(NUM_SPLITS))
+print(f"Data:\n{data}\n")
+print(f'K-Fold split (with n_splits = {NUM_SPLITS}):\n')
 
 for train, test in split_data:
     output_train = ''
@@ -32,12 +32,12 @@ for train, test in split_data:
 
     # Build our output for display from the resulting split
     for i in train:
-        output_train = "{}({}: {}) ".format(output_train, i, data[i])
+        output_train = f"{output_train}({i}: {data[i]}) "
 
     for i in test:
         bar[i] = "T"
-        output_test = "{}({}: {}) ".format(output_test, i, data[i])
+        output_test = f"{output_test}({i}: {data[i]}) "
 
-    print("[ {} ]".format(" ".join(bar)))
-    print("Train: {}".format(output_train))
-    print("Test:  {}\n".format(output_test))
+    print(f'[ {" ".join(bar)} ]')
+    print(f"Train: {output_train}")
+    print(f"Test:  {output_test}\n")

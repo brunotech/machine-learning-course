@@ -10,7 +10,7 @@ def under_funct(x):
     return [6*i + 9 for i in x]
 
 #create x values, and run them through each function
-x = range(-3, 4, 1)
+x = range(-3, 4)
 real_y = real_funct(x)
 over_y = over_funct(x)
 under_y = under_funct(x)
@@ -24,9 +24,9 @@ plt.show()
 
 #Output the data in a well formatted way, for the more numerically inclined.
 print("An underfit model may output something like this:")
-for i in range(0, 7):
-    print("x: "+ str(x[i]) + ", real y: " + str(real_y[i]) + ", y: " + str(under_y[i]))
+for i in range(7):
+    print(f"x: {str(x[i])}, real y: {str(real_y[i])}, y: {str(under_y[i])}")
 
 print("An overfit model may look a little like this")
-for i in range(0, 7):
-    print("x: "+ str(x[i]) + ", real y: " + str(real_y[i]) + ", y: " + str(over_y[i]))
+for i in range(7):
+    print(f"x: {str(x[i])}, real y: {str(real_y[i])}, y: {str(over_y[i])}")

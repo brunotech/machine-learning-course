@@ -33,11 +33,11 @@ def net_architecture(images, num_classes=10, is_training=False,
     end_points = {}
 
     with tf.variable_scope(scope, 'Net', [images, num_classes]) as sc:
-        end_points_collection = sc.name + '_end_points'
+        end_points_collection = f'{sc.name}_end_points'
 
         # Collect outputs for conv2d and max_pool2d.
         with tf.contrib.framework.arg_scope([tf.contrib.layers.conv2d, tf.contrib.layers.max_pool2d],
-                                            outputs_collections=end_points_collection):
+                                                    outputs_collections=end_points_collection):
             # Layer-1
             net = tf.contrib.layers.conv2d(images, 32, [5, 5], scope='conv1')
             net = tf.contrib.layers.max_pool2d(net, [2, 2], 2, scope='pool1')
@@ -60,7 +60,7 @@ def net_architecture(images, num_classes=10, is_training=False,
             # Squeeze spatially to eliminate extra dimensions.(embedding layer)
             if spatial_squeeze:
                 logits = tf.squeeze(logits, [1, 2], name='fc4/squeezed')
-                end_points[sc.name + '/fc4'] = logits
+                end_points[f'{sc.name}/fc4'] = logits
             return logits, end_points
 
 

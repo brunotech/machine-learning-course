@@ -1,6 +1,6 @@
 import graphviz
 import itertools
-import random 
+import random
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from sklearn.preprocessing import OneHotEncoder
 
@@ -41,16 +41,14 @@ x_data = encoder.fit_transform(data)
 classifier = DecisionTreeClassifier()
 tree = classifier.fit(x_data, target)
 
-# Now that we have our decision tree, let's predict some outcomes from random data
-# This goes through each class and builds a random set of 5 data points
-prediction_data = []
-for _ in itertools.repeat(None, 5):
-    prediction_data.append([
+prediction_data = [
+    [
         random.choice(classes['supplies']),
         random.choice(classes['weather']),
-        random.choice(classes['worked?'])
-    ])
-
+        random.choice(classes['worked?']),
+    ]
+    for _ in itertools.repeat(None, 5)
+]
 # Use our tree to predict the outcome of the random values
 prediction_results = tree.predict(encoder.transform(prediction_data))
 
@@ -73,14 +71,13 @@ def print_table(data, results):
     print("")
 
 feature_names = (
-    ['supplies-' + x for x in classes["supplies"]] +
-    ['weather-' + x for x in classes["weather"]] +
-    ['worked-' + x for x in classes["worked?"]]
-)
+    [f'supplies-{x}' for x in classes["supplies"]]
+    + [f'weather-{x}' for x in classes["weather"]]
+) + [f'worked-{x}' for x in classes["worked?"]]
 
 # Shows a visualization of the decision tree using graphviz
 # Note that sklearn is unable to generate non-binary trees, so these are based on individual options in each class
-dot_data = export_graphviz(tree, filled=True, proportion=True, feature_names=feature_names) 
+dot_data = export_graphviz(tree, filled=True, proportion=True, feature_names=feature_names)
 graph = graphviz.Source(dot_data)
 graph.render(filename='decision_tree', cleanup=True, view=True)
 

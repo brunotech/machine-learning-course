@@ -26,4 +26,4 @@ print(("Let's consider a new input that:\n"
        "   Talks like a duck\n"
        "   Is large\n"))
 print("What does our model think this should be?")
-print("Answer: %s!" % clf.predict([[1, 1, 1]])[0])
+print(f"Answer: {clf.predict([[1, 1, 1]])[0]}!")

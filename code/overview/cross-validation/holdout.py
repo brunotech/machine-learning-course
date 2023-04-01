@@ -30,9 +30,9 @@ The following output shows a set of sample diabetes data split into test and tra
 """)
 
 # Print our test and training data
-print("Total diabetes data points: {}".format(len(dataframe.index)))
-print("# of training data points: {} (~{}%)".format(len(x_train), TRAIN_SPLIT*100))
-print("# of test data points: {} (~{}%)\n".format(len(x_test), (1-TRAIN_SPLIT)*100))
+print(f"Total diabetes data points: {len(dataframe.index)}")
+print(f"# of training data points: {len(x_train)} (~{TRAIN_SPLIT * 100}%)")
+print(f"# of test data points: {len(x_test)} (~{(1 - TRAIN_SPLIT) * 100}%)\n")
 
 print("If you'd like to see the actual data points, uncomment the print statements at the bottom of this script.")
 # print("Training data:\n{}\n".format(x_train))

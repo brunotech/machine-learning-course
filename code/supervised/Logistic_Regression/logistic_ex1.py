@@ -4,12 +4,10 @@ import random
 
 #defines the classification for the training data.
 def true_classifier(i):
-    if i >= 700:
-        return 1
-    return 0
+    return 1 if i >= 700 else 0
 
 #Generate a random dataset which includes random scores from 0 to 1000.
-x = np.array([ random.randint(0,1000) for i in range(0,1000) ])
+x = np.array([random.randint(0,1000) for _ in range(1000)])
 
 #The model will expect a 2D array, so we must reshape
 #For the model, the 2D array must have rows equal to the number of samples,
@@ -19,7 +17,7 @@ x = x.reshape((-1, 1))
 
 #For each point, y is a pass/fail for the grade. The simple threshold is arbitrary,
 #and can be changed as you would like. Classes are 1 for success and 0 for failure
-y = [ true_classifier(x[i][0]) for i in range(0,1000) ]
+y = [true_classifier(x[i][0]) for i in range(1000)]
 
 
 #Again, we need a numpy array, so we convert.
@@ -32,7 +30,7 @@ model = LogisticRegression(solver='liblinear')
 model = model.fit(x,y)
 
 #Create 100 random samples to try against our model as test data
-samples = [random.randint(0,1000) for i in range(0,100)]
+samples = [random.randint(0,1000) for _ in range(100)]
 #Once again, we need a 2d Numpy array
 samples = np.array(samples)
 samples = samples.reshape(-1, 1)
@@ -48,10 +46,12 @@ num_accurate = 0
 #So, the probability array is the probability of failure, followed by the probability of passing.
 #In an example run, [7]: Class 0, probability [  9.99966694e-01   3.33062825e-05]
 #Means that for value 7, the class is 0 (failure) and the probability of failure is 99.9%
-for i in range(0,100):
+for i in range(100):
     if (true_classifier(samples[i])) == (_class[i] == 1):
         num_accurate = num_accurate + 1
-    print("" + str(samples[i]) + ": Class " + str(_class[i]) + ", probability " + str(proba[i]))
+    print(
+        f"{str(samples[i])}: Class {str(_class[i])}, probability {str(proba[i])}"
+    )
 #skip a line to separate overall result from sample output
 print("")
-print(str(num_accurate) +" out of 100 correct.")
+print(f"{str(num_accurate)} out of 100 correct.")

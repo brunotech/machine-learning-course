@@ -62,7 +62,7 @@ init = tf.global_variables_initializer()
 with tf.Session() as sess:
     sess.run(init)
     for ep in range(epoch_num):  # epochs loop
-        for batch_n in range(batch_per_ep):  # batches loop
+        for _ in range(batch_per_ep):
             batch_img, batch_label = mnist.train.next_batch(batch_size)  # read a batch
             batch_img = batch_img.reshape((-1, 28, 28, 1))               # reshape each sample to an (28, 28) image
             batch_img = resize_batch(batch_img)                          # reshape the images to (32, 32)

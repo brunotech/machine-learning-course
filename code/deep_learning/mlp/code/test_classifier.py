@@ -9,13 +9,16 @@ import sys
 ######### Necessary Flags ############
 ######################################
 tf.app.flags.DEFINE_string(
-    'test_dir', os.path.dirname(os.path.abspath(__file__)) + '/test_logs',
-    'Directory where event logs are written to.')
+    'test_dir',
+    f'{os.path.dirname(os.path.abspath(__file__))}/test_logs',
+    'Directory where event logs are written to.',
+)
 
 tf.app.flags.DEFINE_string(
     'checkpoint_dir',
-    os.path.dirname(os.path.abspath(__file__)) + '/checkpoints',
-    'Directory where checkpoints are written to.')
+    f'{os.path.dirname(os.path.abspath(__file__))}/checkpoints',
+    'Directory where checkpoints are written to.',
+)
 
 tf.app.flags.DEFINE_integer('num_classes', 10,
                             'Number of model clones to deploy.')
@@ -221,8 +224,12 @@ with graph.as_default():
             ########## Plot the progressive bar #############
             #################################################
 
-            print("Batch " + str(batch_num + 1) + ", Testing Loss= " + \
-                  "{:.5f}".format(test_batch_accuracy))
+            print(
+                (
+                    f"Batch {str(batch_num + 1)}, Testing Loss= "
+                    + "{:.5f}".format(test_batch_accuracy)
+                )
+            )
 
 
         ######################################################################

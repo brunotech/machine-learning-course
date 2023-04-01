@@ -124,8 +124,12 @@ def train(**keywords):
                                'label_place']: keywords['data'].test.labels,
                            keywords['tensors'][
                                'dropout_param']: 1.})
-            print("Epoch " + str(epoch + 1) + ", Testing Accuracy= " + \
-                  "{:.5f}".format(test_accuracy_epoch))
+            print(
+                (
+                    f"Epoch {str(epoch + 1)}, Testing Accuracy= "
+                    + "{:.5f}".format(test_accuracy_epoch)
+                )
+            )
 
             ###########################################################
             ########## Write the summaries for test phase #############
@@ -149,7 +153,7 @@ def train(**keywords):
 
     # save the model
     save_path = keywords['saver'].save(keywords['sess'], os.path.join(keywords['checkpoint_dir'], checkpoint_prefix))
-    print("Model saved in file: %s" % save_path)
+    print(f"Model saved in file: {save_path}")
 
 
     ############################################################################

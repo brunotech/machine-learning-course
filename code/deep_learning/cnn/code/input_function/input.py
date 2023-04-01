@@ -23,8 +23,9 @@ class DATA_OBJECT(object):
         if dtype not in (np.uint8, np.float32):
             raise TypeError('Invalid image dtype %r, expected uint8 or float32' %
                             dtype)
-        assert images.shape[0] == labels.shape[0], (
-            'images.shape: %s labels.shape: %s' % (images.shape, labels.shape))
+        assert (
+            images.shape[0] == labels.shape[0]
+        ), f'images.shape: {images.shape} labels.shape: {labels.shape}'
         self._num_samples = images.shape[0]
 
         # [num_examples, rows, columns, depth] -> [num_examples, rows*columns]
@@ -105,6 +106,4 @@ def provide_data(mnist):
 
     # Create the whole data object
     DataSetObject = collections.namedtuple('DataSetObject', ['train', 'validation', 'test'])
-    data = DataSetObject(train=train, validation=validation, test=test)
-
-    return data
+    return DataSetObject(train=train, validation=validation, test=test)

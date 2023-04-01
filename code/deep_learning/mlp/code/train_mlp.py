@@ -9,13 +9,16 @@ import os
 ######################################
 
 tf.app.flags.DEFINE_string(
-    'train_root', os.path.dirname(os.path.abspath(__file__)) + '/train_logs',
-    'Directory where event logs are written to.')
+    'train_root',
+    f'{os.path.dirname(os.path.abspath(__file__))}/train_logs',
+    'Directory where event logs are written to.',
+)
 
 tf.app.flags.DEFINE_string(
     'checkpoint_root',
-    os.path.dirname(os.path.abspath(__file__)) + '/checkpoints',
-    'Directory where checkpoints are written to.')
+    f'{os.path.dirname(os.path.abspath(__file__))}/checkpoints',
+    'Directory where checkpoints are written to.',
+)
 
 tf.app.flags.DEFINE_integer('max_num_checkpoint', 10,
                             'Maximum number of checkpoints that TensorFlow will keep.')
@@ -273,8 +276,7 @@ with graph.as_default():
                 ########## Plot the progressive bar #############
                 #################################################
 
-            print("Epoch #" + str(epoch + 1) + ", Train Loss=" + \
-                  "{:.3f}".format(batch_loss))
+            print((f"Epoch #{str(epoch + 1)}, Train Loss=" + "{:.3f}".format(batch_loss)))
 
             #####################################################
             ########## Evaluation on the test data #############
@@ -314,7 +316,7 @@ with graph.as_default():
 
         # save the model
         save_path = saver.save(sess, os.path.join(FLAGS.checkpoint_root, checkpoint_prefix))
-        print("Model saved in file: %s" % save_path)
+        print(f"Model saved in file: {save_path}")
 
         ############################################################################
         ########## Run the session for pur evaluation on the test data #############

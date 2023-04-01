@@ -12,13 +12,16 @@ import train_evaluation
 ######################################
 
 tf.app.flags.DEFINE_string(
-    'train_dir', os.path.dirname(os.path.abspath(__file__)) + '/train_logs',
-    'Directory where event logs are written to.')
+    'train_dir',
+    f'{os.path.dirname(os.path.abspath(__file__))}/train_logs',
+    'Directory where event logs are written to.',
+)
 
 tf.app.flags.DEFINE_string(
     'checkpoint_dir',
-    os.path.dirname(os.path.abspath(__file__)) + '/checkpoints',
-    'Directory where checkpoints are written to.')
+    f'{os.path.dirname(os.path.abspath(__file__))}/checkpoints',
+    'Directory where checkpoints are written to.',
+)
 
 tf.app.flags.DEFINE_integer('max_num_checkpoint', 10,
                             'Maximum number of checkpoints that TensorFlow will keep.')
@@ -190,9 +193,14 @@ with graph.as_default():
     # WARNING: tf.summary.histogram can be very time consuming so it will be calculated per epoch!
     for end_point in end_points:
         x = end_points[end_point]
-        tf.summary.scalar('sparsity/' + end_point,
-                          tf.nn.zero_fraction(x), collections=['train', 'test'])
-        tf.summary.histogram('activations/' + end_point, x, collections=['per_epoch_train'])
+        tf.summary.scalar(
+            f'sparsity/{end_point}',
+            tf.nn.zero_fraction(x),
+            collections=['train', 'test'],
+        )
+        tf.summary.histogram(
+            f'activations/{end_point}', x, collections=['per_epoch_train']
+        )
 
     # Summaries for loss and accuracy
     tf.summary.scalar("loss", loss, collections=['train', 'test'])
